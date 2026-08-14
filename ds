@@ -1,0 +1,28 @@
+[1mdiff --git a/src/main/java/com/infy/student_management/controller/StudentController.java b/src/main/java/com/infy/student_management/controller/StudentController.java[m
+[1mindex 204ae2d..4e57802 100644[m
+[1m--- a/src/main/java/com/infy/student_management/controller/StudentController.java[m
+[1m+++ b/src/main/java/com/infy/student_management/controller/StudentController.java[m
+[36m@@ -21,12 +21,13 @@[m [mpublic class StudentController {[m
+ [m
+     private IStudentService iStudentService;[m
+ [m
+[31m-    @GetMapping("/students")[m
+[32m+[m[32m    @GetMapping("/student")[m
+     public ResponseEntity<List<Student>> getAllStudents() {[m
+         return new ResponseEntity<>(iStudentService.getAllStudents(), HttpStatus.OK);[m
+ [m
+     }[m
+ [m
+[32m+[m[32m    @CrossOrigin[m
+     @PostMapping("/student")[m
+     public ResponseEntity<ResponseDto> createStudent(@Valid @RequestBody StudentDto studentDto) {[m
+         iStudentService.createStudent(studentDto);[m
+[36m@@ -34,7 +35,7 @@[m [mpublic class StudentController {[m
+                 .body(new ResponseDto(StudentConstants.STATUS_201, StudentConstants.MESSAGE_201));[m
+     }[m
+ [m
+[31m-    @GetMapping("/student")[m
+[32m+[m[32m    @GetMapping(value = "/student", params = "email")[m
+     public ResponseEntity<StudentDto> getStudent(@RequestParam[m
+                                                  @Email(message = "Enter valid email id")[m
+                                                  String email) {[m

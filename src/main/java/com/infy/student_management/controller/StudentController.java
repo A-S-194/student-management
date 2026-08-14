@@ -21,12 +21,13 @@ public class StudentController {
 
     private IStudentService iStudentService;
 
-    @GetMapping("/students")
+    @GetMapping("/student")
     public ResponseEntity<List<Student>> getAllStudents() {
         return new ResponseEntity<>(iStudentService.getAllStudents(), HttpStatus.OK);
 
     }
 
+    @CrossOrigin
     @PostMapping("/student")
     public ResponseEntity<ResponseDto> createStudent(@Valid @RequestBody StudentDto studentDto) {
         iStudentService.createStudent(studentDto);
@@ -34,7 +35,7 @@ public class StudentController {
                 .body(new ResponseDto(StudentConstants.STATUS_201, StudentConstants.MESSAGE_201));
     }
 
-    @GetMapping("/student")
+    @GetMapping(value = "/student", params = "email")
     public ResponseEntity<StudentDto> getStudent(@RequestParam
                                                  @Email(message = "Enter valid email id")
                                                  String email) {
